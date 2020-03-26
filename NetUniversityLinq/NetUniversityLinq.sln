@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetUniversityLinq", "NetUniversityLinq\NetUniversityLinq.csproj", "{76BBE88A-BA89-4F59-9EB1-B300C9337332}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76BBE88A-BA89-4F59-9EB1-B300C9337332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76BBE88A-BA89-4F59-9EB1-B300C9337332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76BBE88A-BA89-4F59-9EB1-B300C9337332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76BBE88A-BA89-4F59-9EB1-B300C9337332}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A5B4BA7-6764-4CDB-A6B3-01C54E9D031A}
+	EndGlobalSection
+EndGlobal
