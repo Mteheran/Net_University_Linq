@@ -15,15 +15,14 @@ namespace NetUniversityLinq
             listString.Add("Alberto");
             listString.Add("Roberto");
 
-            //var arrayPar = from i in arrayInt
-            //               where i % 2 == 0
-            //               select i;
-            var arrayPar = arrayInt.Where(p => p % 2 == 0);
+            var nombresConM = Enumerable.Where(listString, p => p.ToUpper().StartsWith("M"));
 
-            foreach (var item in arrayPar)
+            foreach (var item in nombresConM)
             {
                 Console.WriteLine(item);
+
             }
+
 
             Console.ReadLine();
         }
