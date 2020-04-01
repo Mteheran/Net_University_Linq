@@ -16,6 +16,9 @@ namespace NetUniversityLinq
                                  select c;
             var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3);
 
+            var TodoslosEstudiantesActivos = estudiantes.Any(p => !p.Activo);
+            Console.WriteLine($"¿Estan todos los estudiantes activos? {(!TodoslosEstudiantesActivos).ToString()}");
+
             Console.WriteLine(" --  CURSOS Filtrado -- ");
             foreach (var item in cursosFiltrada)
             {
