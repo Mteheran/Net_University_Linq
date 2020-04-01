@@ -12,9 +12,10 @@ namespace NetUniversityLinq
             var estudiantes = Data.GetEstudiantes();
 
             var cursosFiltrada = from c in cursos 
-                                 where c.Activo && c.FechaInicio?.Month == 10
+                                 where c.Activo
+                                 orderby c.Nombre, c.Codigo
                                  select c;
-            var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3);
+            var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3).OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
 
             var existeEstudianteSeleccionado = estudiantesFiltrada.Contains(estudiantes[5]);
             Console.WriteLine($"¿El Estudiante seleccionado esta en la lista? {existeEstudianteSeleccionado.ToString()}");
