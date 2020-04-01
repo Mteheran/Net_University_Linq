@@ -8,21 +8,20 @@ namespace NetUniversityLinq
     {
         static void Main(string[] args)
         {
-            int[] arrayInt = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            List<string> listString = new List<string>();
-            listString.Add("Maria");
-            listString.Add("Manuel");
-            listString.Add("Alberto");
-            listString.Add("Roberto");
+            var cursos = Data.GetCursos();
+            var estudiantes = Data.GetEstudiantes();
 
-            var nombresConM = Enumerable.Where(listString, p => p.ToUpper().StartsWith("M"));
-
-            foreach (var item in nombresConM)
+            Console.WriteLine(" --  CURSOS -- ");
+            foreach (var item in cursos)
             {
-                Console.WriteLine(item);
-
+                Console.WriteLine($"{item.Codigo} - {item.Nombre}");
             }
-
+            Console.WriteLine();
+            Console.WriteLine(" --  ESTUDIANTES-- ");
+            foreach (var item in estudiantes)
+            {
+                Console.WriteLine($"{item.Codigo} - {item.Nombre} {item.Apellido}");
+            }
 
             Console.ReadLine();
         }
