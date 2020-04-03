@@ -20,6 +20,7 @@ namespace NetUniversityLinq
 
             var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.Codigo, p.Nombre, p.Apellido });
 
+            Console.WriteLine($"La suma de las primeras letras del nombre es { estudiantes.Aggregate("",(total,p)=> total + p.Nombre[0] + "A" ) }");    
             Console.WriteLine($"la suma de todas las edades es: { estudiantes.Sum(p=> p.Edad) }");
             Console.WriteLine($"el estudiante de mayor edad tiene: { estudiantes.Max(p => p.Edad) }");
             Console.WriteLine($"el estudiante de menor edad tiene: { estudiantes.Min(p => p.Edad) }");
