@@ -20,6 +20,10 @@ namespace NetUniversityLinq
 
             var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.Codigo, p.Nombre, p.Apellido });
 
+
+            Console.WriteLine($"La cantidad de cursos es: {cursos.LongCount(p=> p.Activo) }");
+
+
             var existeEstudianteSeleccionado = estudiantesFiltrada.Contains(estudiantes[5]);
             Console.WriteLine($"¿El Estudiante seleccionado esta en la lista? {existeEstudianteSeleccionado.ToString()}");
 
