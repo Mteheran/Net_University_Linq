@@ -15,12 +15,10 @@ namespace NetUniversityLinq
             var cursosFiltrada = from c in cursos 
                                  where c.Activo
                                  orderby c.Nombre, c.Codigo
-                                 select c;
+                                 select new { c.Nombre, c.Codigo };
             var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3).OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
 
-            var estudiantesOrdenada = estudiantesFiltrada.ToList();
-
-            estudiantesOrdenada.Sort(new OrdenadorPorEdad());
+            var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.Codigo, p.Nombre, p.Apellido });
 
             var existeEstudianteSeleccionado = estudiantesFiltrada.Contains(estudiantes[5]);
             Console.WriteLine($"¿El Estudiante seleccionado esta en la lista? {existeEstudianteSeleccionado.ToString()}");
