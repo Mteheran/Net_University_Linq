@@ -12,13 +12,13 @@ namespace NetUniversityLinq
             var cursos = Data.GetCursos();
             var estudiantes = Data.GetEstudiantes();
 
-            var cursosFiltrada = from c in cursos 
-                                 where c.Activo
+            var cursosFiltrada = (from c in cursos 
                                  orderby c.Nombre, c.Codigo
-                                 select new { c.Nombre, c.Codigo };
+                                 group c by new { c.Activo, c.FechaInicio} into todosLosCursos
+                                 select todosLosCursos);
             var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3).OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
 
-            var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.Codigo, p.Nombre, p.Apellido });
+            var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.CursoId, p.Codigo, p.Nombre, p.Apellido }).ToLookup(p=> p.CursoId);
 
             Console.WriteLine($"La suma de las primeras letras del nombre es { estudiantes.Aggregate("",(total,p)=> total + p.Nombre[0] + "A" ) }");    
             Console.WriteLine($"la suma de todas las edades es: { estudiantes.Sum(p=> p.Edad) }");
@@ -34,13 +34,23 @@ namespace NetUniversityLinq
             Console.WriteLine(" --  CURSOS Filtrado -- ");
             foreach (var item in cursosFiltrada)
             {
-                Console.WriteLine($"{item.Codigo} - {item.Nombre}");
+                Console.WriteLine($"Los cursos que estan en estado:  {item.Key.Activo} e inician en {item.Key.FechaInicio?.Date} ");
+
+                foreach (var curso in item)
+                {
+                   Console.WriteLine($"     {curso.Codigo} - {curso.Nombre}");
+                }
             }
             Console.WriteLine();
             Console.WriteLine(" --  ESTUDIANTES Filtrada-- ");
             foreach (var item in estudiantesOrdenada)
             {
-                Console.WriteLine($"{item.Codigo} - {item.Nombre} {item.Apellido}");
+                Console.WriteLine($"Los estudiantes del curso: { cursos.First(p => p.CursoId == item.Key).Nombre}");
+
+                foreach (var estudiante in item)
+                {
+                    Console.WriteLine($"        {estudiante.Codigo} - {estudiante.Nombre} {estudiante.Apellido}");
+                }
             }
 
             Console.WriteLine();
