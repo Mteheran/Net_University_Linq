@@ -12,6 +12,14 @@ namespace NetUniversityLinq
             var cursos = Data.GetCursos();
             var estudiantes = Data.GetEstudiantes();
 
+            var takeCursos = cursos.TakeLast(3);
+
+            Console.WriteLine("CURSOS TAKE y TAKEWHILE");
+
+            foreach (var item in takeCursos)
+            {
+                Console.WriteLine($" {item.Codigo} - {item.Nombre}");
+            }
 
             var skipCursos = cursos.SkipLast(2);
 
