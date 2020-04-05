@@ -14,12 +14,13 @@ namespace NetUniversityLinq
 
             var cursosFiltrada = (from c in cursos 
                                   join e in estudiantes on c.CursoId equals e.CursoId
-                                 orderby c.Nombre, c.Codigo
-                                 group c by new { c.Activo, c.FechaInicio} into todosLosCursos
-                                 select todosLosCursos);
+                                  into EstudiantesCurso
+                                  from ec in EstudiantesCurso.DefaultIfEmpty()
+                                  orderby c.Nombre, c.Codigo
+                                 select new { c.Nombre, c.Codigo, CodigoEstudiante = ec?.Codigo });
             var estudiantesFiltrada = estudiantes.OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
 
-            var estudiantesOrdenada = estudiantesFiltrada.ToList().Join(cursos,e=> e.CursoId,c=> c.CursoId,(e,c)=> new { estudiante = e, curso = c  }).Select(p=> new {NombreCurso = p.curso.Nombre, p.estudiante.Codigo, p.estudiante.Nombre, p.estudiante.Apellido }).ToLookup(p=> p.NombreCurso);
+            var estudiantesOrdenada = estudiantesFiltrada.ToList().Join(cursos, e => e.CursoId, c => c.CursoId, (e, c) => new { estudiante = e, curso = c }).Select(p => new { NombreCurso = p.curso.Nombre, p.estudiante.Codigo, p.estudiante.Nombre, p.estudiante.Apellido }).ToLookup(p => p.NombreCurso);
 
             Console.WriteLine($"La suma de las primeras letras del nombre es { estudiantes.Aggregate("",(total,p)=> total + p.Nombre[0] + "A" ) }");    
             Console.WriteLine($"la suma de todas las edades es: { estudiantes.Sum(p=> p.Edad) }");
@@ -35,12 +36,7 @@ namespace NetUniversityLinq
             Console.WriteLine(" --  CURSOS Filtrado -- ");
             foreach (var item in cursosFiltrada)
             {
-                Console.WriteLine($"Los cursos que estan en estado:  {item.Key.Activo} e inician en {item.Key.FechaInicio?.Date} ");
-
-                foreach (var curso in item)
-                {
-                   Console.WriteLine($"     {curso.Codigo} - {curso.Nombre}");
-                }
+                   Console.WriteLine($"     {item.Codigo} - {item.Nombre} - {item.CodigoEstudiante}");
             }
             Console.WriteLine();
             Console.WriteLine(" --  ESTUDIANTES Filtrada-- ");

@@ -12,6 +12,7 @@ namespace NetUniversityLinq
             cursos.Add(new Curso() { CursoId = 102, Codigo = "C002", Nombre = "Azure functions", FechaInicio = new DateTime(2021, 5, 15), Activo = true });
             cursos.Add(new Curso() { CursoId = 103, Codigo = "C003", Nombre = "Maquinas virtuales", FechaInicio = new DateTime(2021, 1, 30), Activo = true });
             cursos.Add(new Curso() { CursoId = 104, Codigo = "C004", Nombre = "Javascript", Activo = false });
+            cursos.Add(new Curso() { CursoId = 105, Codigo = "C005", Nombre = "Introdución a cloud computing", Activo = true });
 
             return cursos;
         }
