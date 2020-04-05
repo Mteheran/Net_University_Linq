@@ -13,12 +13,13 @@ namespace NetUniversityLinq
             var estudiantes = Data.GetEstudiantes();
 
             var cursosFiltrada = (from c in cursos 
+                                  join e in estudiantes on c.CursoId equals e.CursoId
                                  orderby c.Nombre, c.Codigo
                                  group c by new { c.Activo, c.FechaInicio} into todosLosCursos
                                  select todosLosCursos);
-            var estudiantesFiltrada = estudiantes.Where((p,i) => p.Activo && i > 3).OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
+            var estudiantesFiltrada = estudiantes.OrderByDescending(p=> p.CursoId).ThenBy(p=> p.Nombre);
 
-            var estudiantesOrdenada = estudiantesFiltrada.ToList().Select(p=> new { p.CursoId, p.Codigo, p.Nombre, p.Apellido }).ToLookup(p=> p.CursoId);
+            var estudiantesOrdenada = estudiantesFiltrada.ToList().Join(cursos,e=> e.CursoId,c=> c.CursoId,(e,c)=> new { estudiante = e, curso = c  }).Select(p=> new {NombreCurso = p.curso.Nombre }).ToLookup(p=> p.NombreCurso);
 
             Console.WriteLine($"La suma de las primeras letras del nombre es { estudiantes.Aggregate("",(total,p)=> total + p.Nombre[0] + "A" ) }");    
             Console.WriteLine($"la suma de todas las edades es: { estudiantes.Sum(p=> p.Edad) }");
@@ -45,7 +46,7 @@ namespace NetUniversityLinq
             Console.WriteLine(" --  ESTUDIANTES Filtrada-- ");
             foreach (var item in estudiantesOrdenada)
             {
-                Console.WriteLine($"Los estudiantes del curso: { cursos.First(p => p.CursoId == item.Key).Nombre}");
+                Console.WriteLine($"Los estudiantes del curso: { item.Key }");
 
                 foreach (var estudiante in item)
                 {
