@@ -103,7 +103,7 @@ namespace NetUniversityLinq
             cursos.Add(new Estudiante()
             {
                 EstudianteId = 8,
-                CursoId = 103,
+                CursoId = 0,
                 Codigo = "E008",
                 Nombre = "Eliana",
                 Apellido = "Gonzalez",
