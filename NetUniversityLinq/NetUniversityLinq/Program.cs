@@ -12,6 +12,16 @@ namespace NetUniversityLinq
             var cursos = Data.GetCursos();
             var estudiantes = Data.GetEstudiantes();
 
+
+            var skipCursos = cursos.SkipLast(2);
+
+            Console.WriteLine("CURSOS SKIP y SKIPWHILE");
+
+            foreach (var item in skipCursos)
+            {
+                Console.WriteLine($" {item.Codigo} - {item.Nombre}");
+            }
+
             var cursosActivos = cursos.Where(p => p.Activo);
             var cursosInactivos= cursos.Where(p => !p.Activo);
 
