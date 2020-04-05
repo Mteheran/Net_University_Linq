@@ -12,6 +12,19 @@ namespace NetUniversityLinq
             var cursos = Data.GetCursos();
             var estudiantes = Data.GetEstudiantes();
 
+            var cursosActivos = cursos.Where(p => p.Activo);
+            var cursosInactivos= cursos.Where(p => !p.Activo);
+
+            var todoslosCursos = cursos.Except(cursosInactivos);
+
+            Console.WriteLine("CURSOS UNION, CONTACT, EXCEPT");
+            
+            foreach (var item in todoslosCursos)
+            {
+                Console.WriteLine($" {item.Codigo} - {item.Nombre}");
+            }
+
+
             var cursosFiltrada = (from c in cursos 
                                   join e in estudiantes on c.CursoId equals e.CursoId
                                   into EstudiantesCurso
