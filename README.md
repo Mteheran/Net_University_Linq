@@ -27,8 +27,7 @@ Curso completo de Linq
 3.3. Operadores OrderBy, Sort (20:38)
  
 3.4. Selección dinámica de datos (8:18)
- 
-Quiz
+
 4. Operadores de agregación
  
 4.1. Operador Count y LongCount (8:34)
@@ -58,5 +57,3 @@ Quiz
 7.1 Cláusula Skip y SkipWhile (6:47)
  
 7.2 Cláusula Take y TakeWhile (5:16)
- 
-Quiz Final
