@@ -2,7 +2,7 @@
 Curso completo de Linq
 
 1. Introducción
- 
+
 1.1. Que es LINQ? (5:39)
  
 1.2. Terminología
